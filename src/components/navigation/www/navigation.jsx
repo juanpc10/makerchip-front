@@ -128,7 +128,7 @@ class Navigation extends React.Component {
                     </li>
 
                     <li className="link about">
-                        <a href="https://github.com/login/oauth/authorize?client_id=ce1be4c8f8b69de8a3d0&redirect_uri=http://localhost:3000/api/callback&scope=repo,admin:repo_hook&public_repo">
+                        <a href="https://github.com/login/oauth/authorize?client_id=ce1be4c8f8b69de8a3d0&redirect_uri=http://localhost:3000/api/callback&scope=repo">
                             <h4>login</h4>
                         </a>
                     </li>

@@ -20,7 +20,8 @@ module.exports = (opts, callback) => {
     defaults(opts, {
         host: process.env.API_HOST,
         headers: {
-            authorization: 'token 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'
+
+            authorization: 'token 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'
         },
         responseType: 'json',
         useCsrf: false
