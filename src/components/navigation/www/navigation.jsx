@@ -23,7 +23,7 @@ const AccountNav = require('./accountnav.jsx');
 require('./navigation.scss');
 
 class Navigation extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
         bindAll(this, [
             'getProfileUrl',
@@ -33,14 +33,14 @@ class Navigation extends React.Component {
         // Keep the timeout id so we can cancel it (e.g. when we unmount)
         this.messageCountTimeoutId = -1;
     }
-    componentDidMount () {
+    componentDidMount() {
         if (this.props.user) {
             // Setup polling for messages to start in 2 minutes.
             const twoMinInMs = 2 * 60 * 1000;
             this.messageCountTimeoutId = setTimeout(this.pollForMessages.bind(this, twoMinInMs), twoMinInMs);
         }
     }
-    componentDidUpdate (prevProps) {
+    componentDidUpdate(prevProps) {
         if (prevProps.user !== this.props.user) {
             this.props.handleCloseAccountNav();
             if (this.props.user) {
@@ -56,7 +56,7 @@ class Navigation extends React.Component {
             }
         }
     }
-    componentWillUnmount () {
+    componentWillUnmount() {
         // clear message interval if it exists
         if (this.messageCountTimeoutId !== -1) {
             clearTimeout(this.messageCountTimeoutId);
@@ -64,12 +64,12 @@ class Navigation extends React.Component {
             this.messageCountTimeoutId = -1;
         }
     }
-    getProfileUrl () {
+    getProfileUrl() {
         if (!this.props.user) return;
         return `/users/${this.props.user.username}/`;
     }
 
-    pollForMessages (ms) {
+    pollForMessages(ms) {
         this.props.getMessageCount(this.props.user.username);
         // We only poll if it has been less than 32 minutes.
         // Chances of someone actively using the page for that long without
@@ -83,14 +83,14 @@ class Navigation extends React.Component {
         }
     }
 
-    handleSearchSubmit (formData) {
+    handleSearchSubmit(formData) {
         let targetUrl = '/search/projects';
         if (formData.q) {
             targetUrl += `?q=${encodeURIComponent(formData.q)}`;
         }
         window.location.href = targetUrl;
     }
-    render () {
+    render() {
         const createLink = this.props.user ? '/projects/editor/' : 'https://www.makerchip.com/sandbox/#';
         return (
             <NavigationBox
@@ -116,18 +116,24 @@ class Navigation extends React.Component {
                             <FormattedMessage id="general.explore" />
                         </a>
                     </li>
-                    {/* <li className="link ideas">
+                    <li className="link ideas">
                         <a href="/ideas">
                             <FormattedMessage id="general.ideas" />
                         </a>
-                    </li> */}
+                    </li>
                     <li className="link about">
                         <a href="/about">
                             <FormattedMessage id="general.about" />
                         </a>
                     </li>
 
-                    <li className="search">
+                    <li className="link about">
+                        <a href="https://github.com/login/oauth/authorize?client_id=ce1be4c8f8b69de8a3d0&redirect_uri=http://localhost:3000/api/callback&scope=repo,admin:repo_hook&public_repo">
+                            <h4>login</h4>
+                        </a>
+                    </li>
+
+                    {/* <li className="search">
                         <Form onSubmit={this.handleSearchSubmit}>
                             <Button
                                 className="btn-search"
@@ -141,8 +147,18 @@ class Navigation extends React.Component {
                                 value={this.props.searchTerm}
                             />
                         </Form>
+                    </li> */}
+
+                    <li
+                        className="link right login-item"
+                        key="login"
+                    >
+                        <LoginDropdown
+                            key="login-dropdown"
+                        />
                     </li>
-                    {this.props.session.status === sessionActions.Status.FETCHED ? (
+
+                    {true ? (
                         this.props.user ? [
                             <li
                                 className="link right messages"
@@ -150,7 +166,7 @@ class Navigation extends React.Component {
                             >
                                 <a
                                     href="/messages/"
-                                    title={this.props.intl.formatMessage({id: 'general.messages'})}
+                                    title={this.props.intl.formatMessage({ id: 'general.messages' })}
                                 >
                                     <span
                                         className={classNames({
@@ -167,7 +183,7 @@ class Navigation extends React.Component {
                             >
                                 <a
                                     href="/mystuff/"
-                                    title={this.props.intl.formatMessage({id: 'general.myStuff'})}
+                                    title={this.props.intl.formatMessage({ id: 'general.myStuff' })}
                                 >
                                     <FormattedMessage id="general.myStuff" />
                                 </a>
@@ -194,7 +210,7 @@ class Navigation extends React.Component {
                                 className="link right join"
                                 key="join"
                             >
-                                
+
                             </li>,
                             <li
                                 className="link right login-item"

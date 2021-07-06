@@ -71,6 +71,7 @@ $base-bg: $ui-white;
 .tips-getting-started {
     background-color: $ui-light-gray;
     padding-top: 2.5rem;
+    display: none;
 }
 
 .tips-left {
@@ -79,11 +80,13 @@ $base-bg: $ui-white;
 
 .ideas-image {
     margin-right: 2rem;
+    display: none;
 }
 
 .tips-activity-guides {
     background-color: $ui-light-gray;
     padding-bottom: 2rem;
+    display: none;
 }
 
 .purchase-button {
@@ -113,6 +116,7 @@ $base-bg: $ui-white;
 
 .gray-area {
     background-color: $ui-gray;
+    display: none;
 }
 
 img.tips-icon {
@@ -206,6 +210,7 @@ img.tips-icon {
     }
 
     .tips-info-section {
+        display:none;
         &.mod-align-top {
             align-items: flex-start;
         }

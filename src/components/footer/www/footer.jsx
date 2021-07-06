@@ -19,11 +19,7 @@ const Footer = props => (
         <MediaQuery maxWidth={frameless.mobileIntermediate - 1}>
             <div className="lists">
                 <dl>
-                    <dd>
-                        <a href="/about">
-                            <FormattedMessage id="general.aboutScratch" />
-                        </a>
-                    </dd>
+                   
                     <dd>
                         <a href="https://www.scratchfoundation.org/opportunities">
                             <FormattedMessage id="general.jobs" />
@@ -60,11 +56,7 @@ const Footer = props => (
                     <dt>
                         <FormattedMessage id="general.about" />
                     </dt>
-                    <dd>
-                        <a href="/about">
-                            <FormattedMessage id="general.aboutScratch" />
-                        </a>
-                    </dd>
+        
                    
                     <dd>
                         <a href="/educators">
@@ -115,11 +107,7 @@ const Footer = props => (
                     </dd>
                 </dl>
 
-                <dl>
-                    <dt>
-                        <FormattedMessage id="footer.scratchFamily" />
-                    </dt>
-                </dl>
+               
             </div>
         </MediaQuery>
         <LanguageChooser locale={props.intl.locale} />

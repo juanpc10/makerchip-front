@@ -19,7 +19,9 @@ const urlParams = require('./url-params');
 module.exports = (opts, callback) => {
     defaults(opts, {
         host: process.env.API_HOST,
-        headers: {},
+        headers: {
+            authorization: 'token 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'
+        },
         responseType: 'json',
         useCsrf: false
     });

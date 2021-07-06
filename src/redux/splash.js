@@ -95,11 +95,13 @@ module.exports.getActivity = (username, token) => (dispatch => {
 
 /*
  * Get global homepage rows
- */
+ */ http://161.35.7.0:3000/api/repository \
+
 module.exports.getFeaturedGlobal = () => (dispatch => {
     dispatch(module.exports.setFetchStatus('featured', module.exports.Status.FETCHING));
     api({
-        uri: '/proxy/featured'
+        host: 'http://161.35.7.0:3000',
+        uri: '/api/repository'
     }, (err, body, res) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('featured', module.exports.Status.ERROR));
@@ -112,6 +114,13 @@ module.exports.getFeaturedGlobal = () => (dispatch => {
             return;
         }
         dispatch(module.exports.setFetchStatus('featured', module.exports.Status.FETCHED));
+        console.log('featured', body);
+        body.curator_top_projects = body.community_newest_projects;
+        body.community_most_remixed_projects = body.community_newest_projects;
+        body.scratch_design_studio = body.community_newest_projects;
+        body.community_featured_studios = body.community_newest_projects;
+        body.community_most_loved_projects = body.community_newest_projects;
+        body.community_featured_projects = body.community_newest_projects;
         dispatch(module.exports.setRows('featured', body));
     });
 });
