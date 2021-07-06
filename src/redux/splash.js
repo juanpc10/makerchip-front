@@ -100,7 +100,7 @@ module.exports.getActivity = (username, token) => (dispatch => {
 module.exports.getFeaturedGlobal = () => (dispatch => {
     dispatch(module.exports.setFetchStatus('featured', module.exports.Status.FETCHING));
     api({
-        host: 'http://161.35.7.0:3000',
+        host: 'http://167.99.15.99:3000',
         uri: '/api/repository'
     }, (err, body, res) => {
         if (err) {
