@@ -17,10 +17,13 @@ const urlParams = require('./url-params');
  * @param  {Function} callback [description]
  */
 module.exports = (opts, callback) => {
+    var url = window.location;
+    var access_token = new URLSearchParams(url.search).get('token');
+    console.log('donde->>>>',access_token)
     defaults(opts, {
         host: process.env.API_HOST,
         headers: {
-            authorization: 'token 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'
+            authorization: `token ${access_token}`
         },
         responseType: 'json',
         useCsrf: false
