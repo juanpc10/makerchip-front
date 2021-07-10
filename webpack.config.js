@@ -183,7 +183,7 @@ module.exports = {
             'process.env.ASSET_HOST': '"' + (process.env.ASSET_HOST || 'https://assets.scratch.mit.edu') + '"',
             'process.env.BACKPACK_HOST': '"' + (process.env.BACKPACK_HOST || 'https://backpack.scratch.mit.edu') + '"',
             'process.env.CLOUDDATA_HOST': '"' + (process.env.CLOUDDATA_HOST || 'clouddata.scratch.mit.edu') + '"',
-            'process.env.PROJECT_HOST': '"' + (process.env.PROJECT_HOST || 'http://demo6926047.mockable.io/projects') + '"',
+            'process.env.PROJECT_HOST': '"' + (process.env.PROJECT_HOST || 'http://167.99.15.99:3000/api/projects') + '"',
             'process.env.STATIC_HOST': '"' + (process.env.STATIC_HOST || 'https://cdn2.scratch.mit.edu') + '"',
             'process.env.SCRATCH_ENV': '"' + (process.env.SCRATCH_ENV || 'development') + '"',
             'process.env.SENTRY_DSN': '"' + (process.env.SENTRY_DSN || '') + '"'
