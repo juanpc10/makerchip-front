@@ -421,6 +421,7 @@ module.exports.getOriginalInfo = id => (dispatch => {
 module.exports.getParentInfo = id => (dispatch => {
     dispatch(module.exports.setFetchStatus('parent', module.exports.Status.FETCHING));
     api({
+        host: 'http://167.99.15.99:3000',
         uri: `/projects/${id}`
     }, (err, body) => {
         if (err) {
@@ -741,9 +742,10 @@ module.exports.setLovedStatusViaProxy = (loved, id, username, token) => (dispatc
 });
 
 module.exports.getRemixes = id => (dispatch => {
+    //  uri: `/projects/${id}/remixes?limit=5`
     dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}/remixes?limit=5`
+        uri: `/projects/494879046/remixes?limit=5`
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.ERROR));
