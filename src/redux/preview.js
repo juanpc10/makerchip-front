@@ -396,6 +396,7 @@ module.exports.getVisibilityInfo = (id, ownerUsername, token) => (dispatch => {
 module.exports.getOriginalInfo = id => (dispatch => {
     dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHING));
     api({
+        host: 'http://167.99.15.99:3000',
         uri: `/projects/${id}`
     }, (err, body) => {
         if (err) {
