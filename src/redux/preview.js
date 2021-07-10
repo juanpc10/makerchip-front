@@ -350,7 +350,7 @@ module.exports.setVisibilityInfo = visibilityInfo => ({
 module.exports.getProjectInfo = (id, token) => (dispatch => {
     const opts = {
         host: 'http://167.99.15.99:3000',
-        uri: `/api//projects/${id}`
+        uri: `/api/projects/${id}`
     };
     if (token) {
         Object.assign(opts, {authentication: token});
