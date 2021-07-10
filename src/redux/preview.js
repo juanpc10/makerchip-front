@@ -862,7 +862,7 @@ module.exports.updateProject = (id, jsonData, username, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
     api({
         host: 'http://167.99.15.99:3000',
-        uri: `/projects/${id}`,
+        uri: `/api/projects/${id}`,
         authentication: token,
         method: 'PUT',
         json: jsonData
