@@ -347,36 +347,7 @@ module.exports.setVisibilityInfo = visibilityInfo => ({
     visibilityInfo: visibilityInfo
 });
 
-module.exports.getProjectInfo = (id, token) => (dispatch => {
-    const opts = {
-        host: 'http://167.99.15.99:3000',
-        uri: `/api/projects/${id}`
-    };
-    if (token) {
-        Object.assign(opts, {authentication: token});
-    }
-    dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
-    api(opts, (err, body, response) => {
-        if (err) {
-            dispatch(module.exports.setFetchStatus('project', module.exports.Status.ERROR));
-            dispatch(module.exports.setError(err));
-            return;
-        }
-        if (typeof body === 'undefined' || response.statusCode === 404) {
-            dispatch(module.exports.setFetchStatus('project', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No project info'));
-            dispatch(module.exports.setProjectInfo(null));
-            return;
-        }
-        dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHED));
-        dispatch(module.exports.setProjectInfo(body));
 
-        // If the project is not public, make a follow-up request for why
-        if (!body.public) {
-            dispatch(module.exports.getVisibilityInfo(id, body.author.username, token));
-        }
-    });
-});
 
 module.exports.getVisibilityInfo = (id, ownerUsername, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHING));
@@ -417,6 +388,65 @@ module.exports.getOriginalInfo = id => (dispatch => {
         }
         dispatch(module.exports.setOriginalInfo(body));
     });
+});
+module.exports.getProjectInfo = (id, token) => (dispatch => {
+
+    dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHING));
+    api({
+        host: 'http://167.99.15.99:3000',
+        uri: `/api/projects/${id}`
+    }, (err, body) => {
+        if (err) {
+            dispatch(module.exports.setFetchStatus('original', module.exports.Status.ERROR));
+            dispatch(module.exports.setError(err));
+            return;
+        }
+        if (typeof body === 'undefined') {
+            dispatch(module.exports.setFetchStatus('original', module.exports.Status.ERROR));
+            dispatch(module.exports.setError('No original info'));
+            return;
+        }
+        dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHED));
+        if (body && body.code === 'NotFound') {
+            dispatch(module.exports.setOriginalInfo({}));
+            return;
+        }
+        // If the project is not public, make a follow-up request for why
+        if (!body.public) {
+            dispatch(module.exports.getVisibilityInfo(id, body.author.username, token));
+        }
+    });
+
+
+    
+    // const opts = {
+    //     host: 'http://167.99.15.99:3000',
+    //     uri: `/api/projects/${id}`
+    // };
+    // if (token) {
+    //     Object.assign(opts, {authentication: token});
+    // }
+    // dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
+    // api(opts, (err, body, response) => {
+    //     if (err) {
+    //         dispatch(module.exports.setFetchStatus('project', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError(err));
+    //         return;
+    //     }
+    //     if (typeof body === 'undefined' || response.statusCode === 404) {
+    //         dispatch(module.exports.setFetchStatus('project', module.exports.Status.ERROR));
+    //         dispatch(module.exports.setError('No project info'));
+    //         dispatch(module.exports.setProjectInfo(null));
+    //         return;
+    //     }
+    //     dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHED));
+    //     dispatch(module.exports.setProjectInfo(body));
+
+    //     // If the project is not public, make a follow-up request for why
+    //     if (!body.public) {
+    //         dispatch(module.exports.getVisibilityInfo(id, body.author.username, token));
+    //     }
+    // });
 });
 
 module.exports.getParentInfo = id => (dispatch => {
