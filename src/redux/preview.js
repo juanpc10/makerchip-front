@@ -350,7 +350,7 @@ module.exports.setVisibilityInfo = visibilityInfo => ({
 module.exports.getProjectInfo = (id, token) => (dispatch => {
     const opts = {
         host: 'http://167.99.15.99:3000',
-        uri: `/projects/${id}`
+        uri: `/api//projects/${id}`
     };
     if (token) {
         Object.assign(opts, {authentication: token});
@@ -398,7 +398,7 @@ module.exports.getOriginalInfo = id => (dispatch => {
     dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHING));
     api({
         host: 'http://167.99.15.99:3000',
-        uri: `/projects/${id}`
+        uri: `/api/projects/${id}`
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('original', module.exports.Status.ERROR));
@@ -423,7 +423,7 @@ module.exports.getParentInfo = id => (dispatch => {
     dispatch(module.exports.setFetchStatus('parent', module.exports.Status.FETCHING));
     api({
         host: 'http://167.99.15.99:3000',
-        uri: `/projects/${id}`
+        uri: `/api/projects/${id}`
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('parent', module.exports.Status.ERROR));
