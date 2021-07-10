@@ -349,6 +349,7 @@ module.exports.setVisibilityInfo = visibilityInfo => ({
 
 module.exports.getProjectInfo = (id, token) => (dispatch => {
     const opts = {
+        host: 'http://167.99.15.99:3000',
         uri: `/projects/${id}`
     };
     if (token) {
@@ -860,6 +861,7 @@ module.exports.leaveStudio = (studioId, projectId, token) => (dispatch => {
 module.exports.updateProject = (id, jsonData, username, token) => (dispatch => {
     dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
     api({
+        host: 'http://167.99.15.99:3000',
         uri: `/projects/${id}`,
         authentication: token,
         method: 'PUT',
