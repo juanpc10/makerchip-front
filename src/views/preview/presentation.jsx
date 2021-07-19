@@ -232,9 +232,10 @@ const PreviewPresentation = ({
                         <FlexRow className="preview-row force-row">
                             <FlexRow className="project-header">
                                 <a href={`/users/${projectInfo.author.username}`}>
+                        
                                     <Avatar
                                         alt={projectInfo.author.username}
-                                        src={thumbnailUrl(projectInfo.author.id, 48)}
+                                        src={projectInfo.author.profile.images['32x32']}
                                     />
                                 </a>
                                 <div className="title">
@@ -297,12 +298,9 @@ const PreviewPresentation = ({
                                         <FormattedMessage id="project.usernameBlockAlert" />
                                     </FlexRow>
                                 )}
-                                <div style={{
-                                    width: '100%',
-                                    height: '360px',
-                                    marginTop: '44px',
-                                    background: '#4d97ff'
-                                }}>
+                                <div>
+
+                                <img style={{maxWidth: '97%', height:' 399px'}} src={projectInfo.image}/>
                                    
                                 </div>
                                 {/* <IntlGUI

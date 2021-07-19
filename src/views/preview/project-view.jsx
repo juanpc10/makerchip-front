@@ -161,7 +161,7 @@ class Preview extends React.Component {
                 this.props.getProjectStudios(this.props.projectInfo.id,
                     this.props.authorUsername, this.props.isAdmin, token);
                 if (this.props.projectInfo.remix.parent !== null) {
-                    this.props.getParentInfo(this.props.projectInfo.remix.parent);
+                    this.props.getParentInfo(this.props.projectInfo.id);
                 }
                 if (this.props.projectInfo.remix.root !== null &&
                     this.props.projectInfo.remix.root !== this.props.projectInfo.remix.parent
