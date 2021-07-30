@@ -143,34 +143,7 @@ class Ideas extends React.Component {
                 </div>
                 <div>
                     <div className="inner">
-                        <FlexRow
-                            as="section"
-                            className="tips-info-section cards-info ideas-all-cards"
-                        >
-                            <div className="tips-info-body">
-                                <h2>
-                                    <FormattedMessage id="ideas.cardsTitle" />
-                                </h2>
-                                <p>
-                                    <FormattedHTMLMessage id="ideas.cardsText" />
-                                </p>
-                                <a
-                                    href={this.props.intl.formatMessage({
-                                        id: 'cards.scratch-cards-allLink'
-                                    })}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    <Button className="ideas-button">
-                                        <img src="/images/ideas/download-icon.svg" />
-                                        <FormattedMessage id="general.downloadPDF" />
-                                    </Button>
-                                </a>
-                            </div>
-                            <div className="tips-info-body tips-illustration">
-                                <img src="/images/ideas/cards-illustration.svg" />
-                            </div>
-                        </FlexRow>
+     
                     </div>
                 </div>
                 <div className="inner">

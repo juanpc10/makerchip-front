@@ -161,7 +161,7 @@ class Preview extends React.Component {
                 this.props.getProjectStudios(this.props.projectInfo.id,
                     this.props.authorUsername, this.props.isAdmin, token);
                 if (this.props.projectInfo.remix.parent !== null) {
-                    this.props.getParentInfo(this.props.projectInfo.remix.parent);
+                    this.props.getParentInfo(this.props.projectInfo.id);
                 }
                 if (this.props.projectInfo.remix.root !== null &&
                     this.props.projectInfo.remix.root !== this.props.projectInfo.remix.parent
@@ -213,7 +213,7 @@ class Preview extends React.Component {
         if (this.props.userPresent) {
             const username = this.props.user.username;
             const token = this.props.user.token;
-            this.props.getProjectInfo(this.state.projectId, token);
+            this.props.getProjectInfo(this.state.projectId);
             this.props.getRemixes(this.state.projectId, token);
             this.props.getCuratedStudios(username);
             this.props.getFavedStatus(this.state.projectId, username, token);
@@ -276,7 +276,8 @@ class Preview extends React.Component {
         }).then(body => {
             const fetchProjectInfo = (count, resolve) => {
                 api({
-                    uri: `/projects/${body.id}`,
+                    host: 'http://167.99.15.99:3000',
+                    uri: `/api/projects/${body.id}`,
                     authentication: this.props.user.token
                 }, (err, projectInfo, response) => {
                     if (err) {

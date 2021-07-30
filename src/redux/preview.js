@@ -347,9 +347,55 @@ module.exports.setVisibilityInfo = visibilityInfo => ({
     visibilityInfo: visibilityInfo
 });
 
+
+
+module.exports.getVisibilityInfo = (id, ownerUsername, token) => (dispatch => {
+    dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHING));
+    api({
+        uri: `/users/${ownerUsername}/projects/${id}/visibility`,
+        authentication: token
+    }, (err, body, response) => {
+        if (err || !body || response.statusCode !== 200) {
+            dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.ERROR));
+            dispatch(module.exports.setError('No visibility info available'));
+            return;
+        }
+        dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHED));
+        dispatch(module.exports.setVisibilityInfo(body));
+    });
+});
+
+module.exports.getOriginalInfo = id => (dispatch => {
+    console.log(2, id);
+    dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHING));
+    api({
+        host: 'http://167.99.15.99:3000',
+        uri: `/api/projects/${id}`
+    }, (err, body) => {
+        if (err) {
+            dispatch(module.exports.setFetchStatus('original', module.exports.Status.ERROR));
+            dispatch(module.exports.setError(err));
+            return;
+        }
+        if (typeof body === 'undefined') {
+            dispatch(module.exports.setFetchStatus('original', module.exports.Status.ERROR));
+            dispatch(module.exports.setError('No original info'));
+            return;
+        }
+        dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHED));
+        if (body && body.code === 'NotFound') {
+            dispatch(module.exports.setOriginalInfo({}));
+            return;
+        }
+        dispatch(module.exports.setOriginalInfo(body));
+    });
+});
 module.exports.getProjectInfo = (id, token) => (dispatch => {
+    console.log(3, id);
+    
     const opts = {
-        uri: `/projects/${id}`
+        host: 'http://167.99.15.99:3000',
+        uri: `/api/projects/${id}`
     };
     if (token) {
         Object.assign(opts, {authentication: token});
@@ -377,50 +423,12 @@ module.exports.getProjectInfo = (id, token) => (dispatch => {
     });
 });
 
-module.exports.getVisibilityInfo = (id, ownerUsername, token) => (dispatch => {
-    dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHING));
-    api({
-        uri: `/users/${ownerUsername}/projects/${id}/visibility`,
-        authentication: token
-    }, (err, body, response) => {
-        if (err || !body || response.statusCode !== 200) {
-            dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No visibility info available'));
-            return;
-        }
-        dispatch(module.exports.setFetchStatus('visibility', module.exports.Status.FETCHED));
-        dispatch(module.exports.setVisibilityInfo(body));
-    });
-});
-
-module.exports.getOriginalInfo = id => (dispatch => {
-    dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHING));
-    api({
-        uri: `/projects/${id}`
-    }, (err, body) => {
-        if (err) {
-            dispatch(module.exports.setFetchStatus('original', module.exports.Status.ERROR));
-            dispatch(module.exports.setError(err));
-            return;
-        }
-        if (typeof body === 'undefined') {
-            dispatch(module.exports.setFetchStatus('original', module.exports.Status.ERROR));
-            dispatch(module.exports.setError('No original info'));
-            return;
-        }
-        dispatch(module.exports.setFetchStatus('original', module.exports.Status.FETCHED));
-        if (body && body.code === 'NotFound') {
-            dispatch(module.exports.setOriginalInfo({}));
-            return;
-        }
-        dispatch(module.exports.setOriginalInfo(body));
-    });
-});
-
 module.exports.getParentInfo = id => (dispatch => {
+    console.log(4, id);
     dispatch(module.exports.setFetchStatus('parent', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}`
+        host: 'http://167.99.15.99:3000',
+        uri: `/api/projects/${id}`
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('parent', module.exports.Status.ERROR));
@@ -740,9 +748,10 @@ module.exports.setLovedStatusViaProxy = (loved, id, username, token) => (dispatc
 });
 
 module.exports.getRemixes = id => (dispatch => {
+    //  uri: `/projects/${id}/remixes?limit=5`
     dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}/remixes?limit=5`
+        uri: `/projects/494879046/remixes?limit=5`
     }, (err, body) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('remixes', module.exports.Status.ERROR));
@@ -855,9 +864,11 @@ module.exports.leaveStudio = (studioId, projectId, token) => (dispatch => {
 });
 
 module.exports.updateProject = (id, jsonData, username, token) => (dispatch => {
+    console.log(1, id);
     dispatch(module.exports.setFetchStatus('project', module.exports.Status.FETCHING));
     api({
-        uri: `/projects/${id}`,
+        host: 'http://167.99.15.99:3000',
+        uri: `/api/projects/${id}`,
         authentication: token,
         method: 'PUT',
         json: jsonData

@@ -102,6 +102,7 @@ module.exports.getFeaturedGlobal = () => (dispatch => {
     api({
         host: 'http://167.99.15.99:3000',
         uri: '/api/repository'
+        
     }, (err, body, res) => {
         if (err) {
             dispatch(module.exports.setFetchStatus('featured', module.exports.Status.ERROR));

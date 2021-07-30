@@ -36,7 +36,8 @@ class FormsyProjectUpdater extends React.Component {
         if (jsonData[this.props.field] === this.state.value) return;
 
         api({
-            uri: `/projects/${this.props.projectInfo.id}`,
+            host: 'http://167.99.15.99:3000',
+            uri: `/api/projects/${this.props.projectInfo.id}`,
             authentication: this.props.user.token,
             method: 'PUT',
             json: jsonData

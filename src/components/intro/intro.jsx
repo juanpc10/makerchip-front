@@ -30,9 +30,9 @@ class Intro extends React.Component {
                 <FlexRow className="intro-container">
                     <FlexRow className="intro-content column">
                         <h1 className="intro-header">
-                            <span>{this.props.messages['intro.tagLine1']}</span>
+                            <span>Develop Verilog in your Browser</span>
                             <br />
-                            <span>{this.props.messages['intro.tagLine2']}</span>
+                            <span>Easy Pipelining</span>
                         </h1>
                         <FlexRow className="intro-buttons">
                             <a
