@@ -1,8 +1,22 @@
-<<<<<<< HEAD
-# MakerChip ReactJS
 
-=======
-# scratch-www
+# MakerChip Frontend
+
+Makerchip Community Platform is an open source web interface designed to allow users to share custom hardware designs using Makerchip's unique Electronic Design automation (EDA) propietary software and language which enables fast reliable unique design sharing for collaboration among developers. This repository contains the frontend user interface which allows users to share makerchip designs and interact with other users within the community.
+
+Explore projects
+<p align="center">
+  <img src="./images/frontend1.png">
+</p>
+
+Connect your github account
+<p align="center">
+  <img src="./images/frontendwebhooks1.png">
+</p>
+
+
+
+
+## scratch-www
 #### Standalone web client for Scratch
 
 [![Build Status](https://travis-ci.org/LLK/scratch-www.svg)](https://travis-ci.org/LLK/scratch-www)
